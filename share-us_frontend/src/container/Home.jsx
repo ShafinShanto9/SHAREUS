@@ -13,15 +13,19 @@ import Pins from './Pins';
 const Home = () => {
     const [toggleSidebar, setToggleSidebar] = useState(false)
     const [user, setUser] = useState(null)
-    const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear()
     const scrollRef = useRef(null)
+
+    const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+
     useEffect(()=>{
         const query = userQuery(userInfo?.googleId)
         client.fetch(query)
         .then((data) => {
             setUser(data[0])
+            console.log(data)
         })
     },[])
+    
     useEffect(()=>{
         scrollRef.current.scrollTo(0, 0)
     },[])
