@@ -1,19 +1,12 @@
 import React from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
 import { RiHomeFill } from 'react-icons/ri';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../assests/logo.png';
+import { categories } from '../utils/data';
 
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize'
 const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold broder-r-2 border-black transition-all duration-200 ease-in-out capitalize'
-
-const categorise = [
-    {name: 'Animals'},
-    {name: 'Wallpapers'},
-    {name: 'Photography'},
-    {name: 'Gaming'},
-    {name: 'Codding'},
-    {name: 'Other'},
-]
 
 function Sidebar({ closeToggle, user }) {
     const handleCloseSidebar = () => {
@@ -38,14 +31,16 @@ function Sidebar({ closeToggle, user }) {
                     Home
             </NavLink>
             <h3 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Categorise</h3>
-            {categorise.slice(0, categorise.length - 1).map((category) => (
+            {categories.slice(0, categories.length - 1).map((category) => (
                 <NavLink
                 to={`/category/${category.name}`}
                 className={({isActive})=> isActive ? isActiveStyle : isNotActiveStyle}
                 onClick={handleCloseSidebar}
                 key={category.name}
                 >
-                    {category.name}
+                 <img src={category.image} className="w-8 h-8 rounded-full shadow-sm" />
+                {category.name}
+                <IoIosArrowForward />
                 </NavLink>
             ))}
         </div>
